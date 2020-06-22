@@ -11,7 +11,7 @@ def get_rates():
         # parse response to json
         data = json.loads(payload.text)
 
-        # save lastest rates to file
+        # save latest rates to file
         save_rates(data)
     except:
         try:
@@ -27,11 +27,11 @@ def get_rates():
 
 def save_rates(data):
     with open('rates.json', 'w+') as file:
-        # jump to beggining of the file
+        # jump to beginning of the file
         file.seek(0)
         # put data into the file
         json.dump(data, file, indent=2, sort_keys=True)
-        # if new data are shorter than previous one
+        # in case new data are shorter than previous one
         # truncate overlapping data
         file.truncate()
 
@@ -43,12 +43,12 @@ def print_currencies(rates):
     dict_of_currencies = rates['rates'].keys()
     # retyped list of currencies from dict.
     list_of_currencies = list(dict_of_currencies)
-    lenght = len(list_of_currencies)
+    length = len(list_of_currencies)
 
     # how many rows is going to be displayed
     display = CURR_IN_ROW
     # loop for displaying currency options
-    for i in range(0, lenght, CURR_IN_ROW):
+    for i in range(0, length, CURR_IN_ROW):
         # printing list without brackets and with coma sepparator
         print(*list_of_currencies[i:display], sep=', ')
         # next iteration is going to show next part of currencies
@@ -72,9 +72,9 @@ def transfer(data, amt, cur1, cur2):
     print(' \\' + '-' * 46 + '/ ')
 
 
-def get_decision(desicion):
+def get_decision(decision):
     yes_decisions = ['y', 'yes', 'true', '1']
-    if desicion in yes_decisions:
+    if decision in yes_decisions:
         return True
     else:
         return False
